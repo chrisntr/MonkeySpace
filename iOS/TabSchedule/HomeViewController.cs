@@ -131,35 +131,35 @@ namespace Monospace11
 		UIBarButtonItem bbi;
 		public HomeViewController () : base (null)
 		{
-			if (UIDevice.CurrentDevice.CheckSystemVersion (6,0)) {
-				// UIRefreshControl iOS6
-				RefreshControl = new UIRefreshControl();
-				RefreshControl.ValueChanged += HandleValueChanged;
-				AppDelegate.Conference.OnDownloadSucceeded += (jsonString) => {
-					Console.WriteLine ("OnDownloadSucceeded");
-					InvokeOnMainThread (() => {
-						RefreshControl.EndRefreshing ();
-					});
-				};
-				AppDelegate.Conference.OnDownloadFailed += (err) => {
-					Console.WriteLine ("OnDownloadFailed");
-					InvokeOnMainThread (() => {
-						RefreshControl.EndRefreshing ();
-					});
-				};
-
-				if (MonoTouch.PassKit.PKPassLibrary.IsAvailable) {
-					// PassKit
-					bbi = new UIBarButtonItem(UIImage.FromBundle ("Images/TicketIcon"), UIBarButtonItemStyle.Plain, (sender, e) => {
-						ShowPassKit();
-					});
-					NavigationItem.SetLeftBarButtonItem (bbi, false);
-				}
-			} else {
-				// old style refresh button and no PassKit for older iOS
+//			if (UIDevice.CurrentDevice.CheckSystemVersion (6,0)) {
+//				// UIRefreshControl iOS6
+//				RefreshControl = new UIRefreshControl();
+//				RefreshControl.ValueChanged += HandleValueChanged;
+//				AppDelegate.Conference.OnDownloadSucceeded += (jsonString) => {
+//					Console.WriteLine ("OnDownloadSucceeded");
+//					InvokeOnMainThread (() => {
+//						RefreshControl.EndRefreshing ();
+//					});
+//				};
+//				AppDelegate.Conference.OnDownloadFailed += (err) => {
+//					Console.WriteLine ("OnDownloadFailed");
+//					InvokeOnMainThread (() => {
+//						RefreshControl.EndRefreshing ();
+//					});
+//				};
+//
+//				if (MonoTouch.PassKit.PKPassLibrary.IsAvailable) {
+//					// PassKit
+//					bbi = new UIBarButtonItem(UIImage.FromBundle ("Images/TicketIcon"), UIBarButtonItemStyle.Plain, (sender, e) => {
+//						ShowPassKit();
+//					});
+//					NavigationItem.SetLeftBarButtonItem (bbi, false);
+//				}
+//			} else {
+//				// old style refresh button and no PassKit for older iOS
 				NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Refresh), false);
 				NavigationItem.RightBarButtonItem.Clicked += (sender, e) => { Refresh(); };
-			}
+//			}
 		}
 		// UIRefreshControl iOS6
 		void HandleValueChanged (object sender, EventArgs e)
