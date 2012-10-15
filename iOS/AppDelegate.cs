@@ -112,8 +112,11 @@ namespace Monospace11
 		
 		void showSplashScreen ()
 		{
-			splashView = new UIImageView(new RectangleF(0f, 0f, 320f, 480f));
-			splashView.Image = UIImage.FromFile("Default.png");
+			splashView = new UIImageView(UIScreen.MainScreen.Bounds);
+			if (UIScreen.MainScreen.Bounds.Height > 480f)
+				splashView.Image = UIImage.FromFile("Default-568h@2x.png");
+			else
+				splashView.Image = UIImage.FromFile("Default.png");
 			window.AddSubview(splashView);
 			window.BringSubviewToFront(splashView);
 			UIView.BeginAnimations("SplashScreen");
