@@ -83,7 +83,10 @@ namespace Monospace11
 			segmentedControl.SelectedSegment = 0;
 			segmentedControl.ControlStyle = UISegmentedControlStyle.Bar;
 			segmentedControl.TintColor = UIColor.DarkGray;
-			
+
+			if(UIDevice.CurrentDevice.CheckSystemVersion(6,0))
+				segmentedControl.InsertSegment ("Directions", 3, false);
+
 			segmentedControl.ValueChanged += delegate {
 				if (segmentedControl.SelectedSegment == 0)
 					mapView.MapType = MonoTouch.MapKit.MKMapType.Standard;
@@ -91,6 +94,18 @@ namespace Monospace11
 					mapView.MapType = MonoTouch.MapKit.MKMapType.Satellite;
 				else if (segmentedControl.SelectedSegment == 2)
 					mapView.MapType = MonoTouch.MapKit.MKMapType.Hybrid;
+				else if (segmentedControl.SelectedSegment == 3) {
+					var conferenceMapItem = new MKMapItem(new MKPlacemark(ConferenceLocation, null));
+					conferenceMapItem.Name = "MonkeySpace";
+					
+					var conferenceHotel = new MKMapItem(new MKPlacemark(new CLLocationCoordinate2D(42.36346, -71.0863), null));
+					conferenceHotel.Name = "MonkeySpace Hotel";
+					
+					var mapItems = new MKMapItem[] { conferenceMapItem, conferenceHotel };
+					MKMapItem.OpenMaps(mapItems, new MKLaunchOptions() {
+						DirectionsMode = MKDirectionsMode.Walking
+					});
+				}
 			};
 			
 			mapView.Delegate = new MapViewDelegate(this); 
