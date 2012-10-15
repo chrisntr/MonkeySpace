@@ -66,10 +66,11 @@ namespace Monospace11
 						var tweet = new TWTweetComposeViewController();
 						tweet.SetInitialText ("I'm in '" + DisplaySession.Title + "' at #monkeyspace" );
 						PresentModalViewController(tweet, true);
-					} else if (host == "facebook.mix10.app") {
-						var facebook = SLComposeViewController.FromService(SLServiceKind.Facebook);
-						facebook.SetInitialText("I'm in '" + DisplaySession.Title + "' at #monkeyspace" );
-						PresentViewController(facebook, true, null);
+					} else if (host == "social.mix10.app") {
+						var message = "I'm in '" + DisplaySession.Title + "' at #monkeyspace";
+						var social = new UIActivityViewController(new NSObject[] { new NSString(message) }, 
+																  new UIActivity[] { new UIActivity() });
+						PresentViewController(social, true, null);
 					} else if (host == "add.mix10.app") {
 						AppDelegate.UserData.AddFavoriteSession(path);
 						Update(DisplaySession);
@@ -122,11 +123,10 @@ namespace Monospace11
 					+ DisplaySession.Start.ToString(timeFormat)+" - " 
 					+ DisplaySession.End.ToString(timeFormat) +"</span><br />"+ Environment.NewLine);
 
-			if (TWTweetComposeViewController.CanSendTweet) {
+			if (UIDevice.CurrentDevice.CheckSystemVersion (6, 0)) {
+				sb.Append ("<a href='http://social.mix10.app/' style='font-weight:normal'><img height=22 width=58 align='right' src='Images/Social.png'></a>");
+			} else if (TWTweetComposeViewController.CanSendTweet) {
 				sb.Append ("<a href='http://tweet.mix10.app/' style='font-weight:normal'><img height=22 width=58 align='right' src='Images/Tweet.png'></a>");
-			}
-			if (UIDevice.CurrentDevice.CheckSystemVersion(6,0) && SLComposeViewController.IsAvailable(SLServiceKind.Facebook)) {
-				sb.Append ("<a href='http://facebook.mix10.app/' style='font-weight:normal'><img height=22 width=58 align='right' src='Images/Facebook.png'></a>");
 			}
 			if (!String.IsNullOrEmpty (DisplaySession.Location))
 			{
