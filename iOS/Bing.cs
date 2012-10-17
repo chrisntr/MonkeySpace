@@ -15,7 +15,7 @@ namespace Monospace11
 	
 	public class Bing
 	{
-		const string AZURE_KEY = "Your Azure Key Here";
+		const string AZURE_KEY = "XdIZ8YFGJs3o0DWHaGSUEx3VJmpTsqFSadX5pec9dl4=";
 		static SynchronizerDelegate sync;
 		
 		public Bing (SynchronizerDelegate sync)
