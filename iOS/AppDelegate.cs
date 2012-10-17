@@ -10,6 +10,7 @@ using MonoTouch.ObjCRuntime;
 using System.Threading;
 using System.Diagnostics;
 using MonkeySpace.Core;
+using MonoTouch.MapKit;
 
 namespace Monospace11
 {
@@ -137,6 +138,15 @@ namespace Monospace11
 			splashView.Dispose();
 		}
 
+		public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+		{
+			if (MKDirectionsRequest.IsDirectionsRequestUrl (url)) {
+				var request = new MKDirectionsRequest(url);
+				// Do something with the request 
+				new UIAlertView("Map Directions Request", "We have a MapKit Directions Request", null, "OK", null).Show();
+			}
+			return true;
+		}
 		
 		public static void GetCellSelectedColor(UITableViewCell cell)
 		{
