@@ -16,7 +16,8 @@ namespace Monospace11
 				  navSessionController
 				, navSpeakerController
 				, navScheduleController
-				, navFavoritesController;
+				, navFavoritesController
+				, navCollectionViewController;
 
 		/// <summary>
 		/// Create the ViewControllers that we are going to use for the tabs:
@@ -62,7 +63,17 @@ namespace Monospace11
 			navFavoritesController.NavigationBar.BarStyle = UIBarStyle.Black;
 			navFavoritesController.TopViewController.Title ="My Schedule";
 			navFavoritesController.TabBarItem = new UITabBarItem("My Schedule", UIImage.FromFile("Images/28-star.png"), 7);
-			
+
+			var flowLayout = new UICollectionViewFlowLayout();
+			flowLayout.HeaderReferenceSize = new System.Drawing.SizeF(300f, 70f);
+			var fvc2 = new PhotosCollectionViewController (flowLayout);
+			navCollectionViewController = new MonoTouch.UIKit.UINavigationController();
+			navCollectionViewController.PushViewController(fvc2, false);
+			navCollectionViewController.NavigationBar.BarStyle = UIBarStyle.Black;
+			navCollectionViewController.TopViewController.Title ="MonkeySpace Photos";
+			navCollectionViewController.TabBarItem = new UITabBarItem("MonkeySpace Photos", UIImage.FromFile("Images/28-star.png"), 7);
+
+
 			var u = new UIViewController[]
 			{
 				  navScheduleController
@@ -70,6 +81,7 @@ namespace Monospace11
 				, navSessionController
 				, mvc
 				, navFavoritesController
+				, navCollectionViewController
 			};
 			
 			SelectedIndex = 0;
