@@ -11,6 +11,7 @@ using System.Threading;
 using System.Diagnostics;
 using MonkeySpace.Core;
 using MonoTouch.MapKit;
+using MonoTouch.EventKit;
 
 namespace Monospace11
 {
@@ -163,4 +164,29 @@ namespace Monospace11
         {
         }
     }
+
+	public class App
+	{
+		public static App Current 
+		{ 
+			get { return current; }
+		}
+		private static App current;
+		
+		public EKEventStore EventStore 
+		{ 
+			get { return eventStore; }
+		}
+		protected EKEventStore eventStore;
+		
+		static App ()
+		{
+			current = new App();
+		}
+		
+		protected App ()
+		{
+			eventStore = new EKEventStore ();
+		} 
+	}
 }

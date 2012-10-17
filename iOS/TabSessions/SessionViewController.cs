@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using MonoTouch.Twitter;
 using MonoTouch.Social;
+using MonoTouch.EventKit;
 
 namespace Monospace11
 {
@@ -73,6 +74,29 @@ namespace Monospace11
 						PresentViewController(social, true, null);
 					} else if (host == "add.mix10.app") {
 						AppDelegate.UserData.AddFavoriteSession(path);
+						App.Current.EventStore.RequestAccess (EKEntityType.Reminder, (bool granted, NSError e) => {
+							if (granted) {
+								
+								EKReminder reminder = EKReminder.Create (App.Current.EventStore); 
+								reminder.Title = DisplaySession.Title;
+								reminder.Calendar = App.Current.EventStore.DefaultCalendarForNewReminders;
+								reminder.Notes = DisplaySession.Abstract;
+								
+								var date = new NSDateComponents();
+								date.Day = DisplaySession.Start.Day;
+								date.Month = DisplaySession.Start.Month;
+								date.Year = DisplaySession.Start.Year;
+								date.Hour = DisplaySession.Start.Hour;
+								date.Minute = DisplaySession.Start.Minute;
+								date.Second = DisplaySession.Start.Second;
+								
+								reminder.StartDateComponents = date;
+								reminder.DueDateComponents = date;
+								
+								App.Current.EventStore.SaveReminder (reminder, true, out e);
+							} else
+								new UIAlertView ( "Access Denied", "User Denied Access to Calendar Data", null, "OK", null).Show ();
+						});
 						Update(DisplaySession);
 					}
 					else if (host == "remove.mix10.app")
