@@ -148,13 +148,13 @@ namespace Monospace11
 					});
 				};
 
-//				if (MonoTouch.PassKit.PKPassLibrary.IsAvailable) {
-//					// PassKit
-//					bbi = new UIBarButtonItem(UIImage.FromBundle ("Images/TicketIcon"), UIBarButtonItemStyle.Plain, (sender, e) => {
-//						ShowPassKit();
-//					});
-//					NavigationItem.SetLeftBarButtonItem (bbi, false);
-//				}
+				if (MonoTouch.PassKit.PKPassLibrary.IsAvailable) {
+					// PassKit
+					bbi = new UIBarButtonItem(UIImage.FromBundle ("Images/TicketIcon"), UIBarButtonItemStyle.Plain, (sender, e) => {
+						ShowPassKit();
+					});
+					NavigationItem.SetLeftBarButtonItem (bbi, false);
+				}
 			} else {
 				// old style refresh button and no PassKit for older iOS
 				NavigationItem.SetRightBarButtonItem (new UIBarButtonItem (UIBarButtonSystemItem.Refresh), false);
