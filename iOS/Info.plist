@@ -30,6 +30,7 @@
 	<string>1.1</string>
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array>
+		<string>MKDirectionsModeBike</string>
 		<string>MKDirectionsModeOther</string>
 	</array>
 	<key>MinimumOSVersion</key>

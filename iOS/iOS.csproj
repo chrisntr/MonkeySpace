@@ -136,6 +136,8 @@
       <Link>Core\SessionDatabase\SQLite.cs</Link>
     </Compile>
     <Compile Include="TabPassKit\PassKitViewController.cs" />
+    <Compile Include="TabPhotos\PhotosCollectionViewController.cs" />
+    <Compile Include="Bing.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TabSessions\" />
@@ -151,6 +153,7 @@
     <Folder Include="Core\" />
     <Folder Include="Core\SessionDatabase\" />
     <Folder Include="TabPassKit\" />
+    <Folder Include="TabPhotos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -196,5 +199,6 @@
     <BundleResource Include="Resources\icon_58.png" />
     <BundleResource Include="Resources\icon_72.png" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\logo.png" />
   </ItemGroup>
 </Project>
